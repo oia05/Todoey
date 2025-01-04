@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class CategoryTableViewCell: UITableViewCell {
+class CategoryTableViewCell: SwipeTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,7 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     func bindCellWithItem(_ category: Category) {
+        backgroundColor = UIColor(hexString: category.color ?? "#FFFFFF")
         self.textLabel?.text = category.name
         accessoryType = .disclosureIndicator
     }

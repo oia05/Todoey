@@ -2,9 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zRL-2x-jqc">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +63,7 @@
         <scene sceneID="fdI-3f-1By">
             <objects>
                 <tableViewController id="TtN-Hz-6Um" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="B0l-9P-Ca0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="B0l-9P-Ca0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -81,50 +81,38 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="MmC-Af-vI3" kind="show" identifier="goToItems" id="Kyy-AC-HCv"/>
+                        <segue destination="2Pk-0Z-66V" kind="show" identifier="goToItems" id="1Ok-yI-0ej"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DGM-d5-x9a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1279" y="4"/>
         </scene>
-        <!--Items-->
-        <scene sceneID="po1-Gl-RjP">
+        <!--items-->
+        <scene sceneID="0if-Z3-G4o">
             <objects>
-                <viewController id="MmC-Af-vI3" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gkP-4k-0jh">
+                <tableViewController id="2Pk-0Z-66V" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="szE-fA-6Fo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="d7X-C3-0oJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="muc-IN-F7n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="d7X-C3-0oJ" secondAttribute="bottom" id="8Ga-w1-uQA"/>
-                            <constraint firstItem="muc-IN-F7n" firstAttribute="trailing" secondItem="d7X-C3-0oJ" secondAttribute="trailing" id="PLo-UV-ENW"/>
-                            <constraint firstItem="d7X-C3-0oJ" firstAttribute="top" secondItem="gkP-4k-0jh" secondAttribute="top" id="Rv9-pW-Acq"/>
-                            <constraint firstItem="d7X-C3-0oJ" firstAttribute="leading" secondItem="muc-IN-F7n" secondAttribute="leading" id="Uhh-hV-yxd"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Items" largeTitleDisplayMode="always" id="Zn3-As-Bzk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6eq-WW-6ma">
+                        <connections>
+                            <outlet property="dataSource" destination="2Pk-0Z-66V" id="IX0-2F-xfI"/>
+                            <outlet property="delegate" destination="2Pk-0Z-66V" id="EEG-GY-YCO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="items" largeTitleDisplayMode="always" id="S2w-KV-mPn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="75F-eN-a2G">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="addButtonClicked:" destination="MmC-Af-vI3" id="BQa-Wr-mZd"/>
+                                <action selector="addButtonClicked:" destination="2Pk-0Z-66V" id="y75-56-VtT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="d7X-C3-0oJ" id="Jnw-e5-rnM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jrB-d5-xtI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Kj-y4-EEX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2422" y="4"/>
+            <point key="canvasLocation" x="2332" y="15"/>
         </scene>
     </scenes>
     <resources>

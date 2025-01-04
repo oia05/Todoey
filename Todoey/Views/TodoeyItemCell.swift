@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class TodoeyItemCell: UITableViewCell {
+class TodoeyItemCell: SwipeTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }

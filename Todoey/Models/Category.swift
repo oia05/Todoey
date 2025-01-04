@@ -12,5 +12,6 @@ import Foundation
 class Category: Object {
     @objc dynamic var name: String?
     @objc dynamic var createdAt: Date = Date()
+    @objc dynamic var color: String?
     let items = List<TodoeyItem>()
 }
