@@ -16,11 +16,19 @@ class CategoryViewController: SwipeTableViewController {
     var categories: Results<Category>?
     let realm = try! Realm()
     
+    var coordinator: MainCoordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "CategoryCell")
+        title = "Todoey"
         loadCategories()
-        
+        setRightBarButtonItem()
+    }
+    
+    private func setRightBarButtonItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
+        navigationItem.largeTitleDisplayMode = .always
     }
     
     override func deleteCell(at indexPath: IndexPath) {
@@ -44,7 +52,7 @@ class CategoryViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+     @objc func addButtonPressed() {
         var alertTextField: UITextField? = nil
         let alert = UIAlertController(title: "Add new Todoey category", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add category", style: .default) { action in
@@ -80,7 +88,9 @@ class CategoryViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard categories != nil else { return }
-        self.performSegue(withIdentifier: "goToItems", sender: self)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            coordinator?.navigateToList(selectedCategory: categories?[indexPath.row])
+        }
     }
     
     func loadCategories() {

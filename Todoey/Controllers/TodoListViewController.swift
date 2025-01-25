@@ -15,6 +15,7 @@ class TodoListViewController: SwipeTableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     var items: Results<TodoeyItem>?
     let realm = try! Realm()
+    var coordinator: Coordinator?
     var selectedCategory: Category? {
         didSet {
             loadItems()
@@ -64,6 +65,12 @@ class TodoListViewController: SwipeTableViewController {
         tableView.delegate = self
         tableView.register(TodoeyItemCell.self, forCellReuseIdentifier: "TodoItemCell")
         setupSearchController()
+        setRightBarButtonItem()
+    }
+    
+    private func setRightBarButtonItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonClicked))
+        navigationItem.largeTitleDisplayMode = .always
     }
     
     func setupSearchController() {
@@ -75,7 +82,7 @@ class TodoListViewController: SwipeTableViewController {
         searchController.searchBar.enablesReturnKeyAutomatically = false
     }
     
-    @IBAction func addButtonClicked(_ sender: UIBarButtonItem) {
+    @objc func addButtonClicked() {
         var alertTextField: UITextField? = nil
         let alert = UIAlertController(title: "Add new Todoey item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add item", style: .default) { action in
